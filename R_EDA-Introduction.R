@@ -65,6 +65,31 @@
 getwd()   # Confirm the correct directory
 
 
+# ==================================================
+# Load Data
+# ==================================================
+
+# Task:
+# In yesterday's workshop we have worked with a
+# a supplementary datafile from a 2014 publication
+# on single-cell RNAseq for the automatic definition
+# of tissue types. The data consists of gene-names,
+# Expression values of clustered cells in the
+# presence and absence of LPS stimulation, and
+# cluster assignment labels. The corresponding
+# paper is on the Wiki.
+
+# We have experimented with loading the data and
+# identified a number of issues. The commands
+# to load the data are in the script readS3.R.
+# Source this script to load the data.
+
+# TASK:
+#     source() the script "readS3.R"
+#     inspect the object "LPSdat".
+
+
+
 # ==== CHECKPOINT =========================
 # Place a green PostIt on the lid of your
 # laptop when done, place a pink PostIt
@@ -89,29 +114,6 @@ getwd()   # Confirm the correct directory
 # - Learn about regular expressions at
 #    http://steipe.biochemistry.utoronto.ca/abc/index.php/Regular_Expressions
 
-
-# ==================================================
-# Load Data
-# ==================================================
-
-# Task:
-# In yesterday's workshop we have worked with a
-# a supplementary datafile from a 2014 publication
-# on single-cell RNAseq for the automatic definition
-# of tissue types. The data consists of gene-names,
-# Expression values of clustered cells in the
-# presence and absence of LPS stimulation, and
-# cluster assignment labels. The corresponding
-# paper is on the Wiki.
-
-# We have experimented with loading the data and
-# identified a number of issues. The commands
-# to load the data are in the script readS3.R.
-# Source this script to load the data.
-
-# TASK:
-#     source() the script "readS3.R"
-#     inspect the object "LPSdat".
 
 
 # ==================================================
