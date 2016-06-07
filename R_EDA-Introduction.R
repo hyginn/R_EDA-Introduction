@@ -228,7 +228,7 @@ p + geom_violin()
 # Plotting more than one column with a boxplot
 # places the plots side by side.
 colnames(LPSdat)
-boxplot(LPSdat[ ,c("MF.ctrl", "MF.LPS")])
+boxplot(LPSdat[ ,c("NK.ctrl", "NK.LPS")])
 boxplot(LPSdat[ , c(seq(2, 14, by = 2), seq(3, 15, by = 2))])
 abline(v=7.5)
 
@@ -285,7 +285,7 @@ plot(x, f, xlab="x", ylab="density", lwd=5, lty=3, type="l")
 set.seed(100)
 x <- rnorm(100, mean=0, sd=1)
 hist(x)
-lines(seq(-3,3,0.1),54*dnorm(seq(-3,3,0.1)), col="red")
+lines(seq(-3,3,0.1), 54 * dnorm(seq(-3,3,0.1)), col="red")
 
 
 
