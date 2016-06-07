@@ -56,11 +56,17 @@
 #     Utilities:
 #        readS3.R
 #        typeInfo.R
+#     Templates:
+#        scriptTemplate.R
+#        functionTemplate.R
 #     Data:
 #        table_S3.csv
 #        GvHD.txt
+#     Papers:
+#       Jaitin 2014
+#       Weissgerber 2015
 #
-# 7 - Confirm:
+# 2 - Confirm:
 #           Confirm that the right files are present.
 getwd()   # Confirm the correct directory
 
