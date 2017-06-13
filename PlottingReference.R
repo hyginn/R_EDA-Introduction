@@ -22,6 +22,20 @@
 # 10 - Special packages
 
 
+# ==================================================
+# The Normal distribution
+# ==================================================
+
+# We often use the Normal distribution to generate sample data, or controls
+# for statistical experiments.
+
+?dnorm
+
+x <- seq(-4, 4, 0.1)
+f <- dnorm(x, mean=0, sd=1)
+plot(x, f, xlab="x", ylab="density", lwd=5, type="l")
+
+
 
 # ==================================================
 # 1 - Types of plots

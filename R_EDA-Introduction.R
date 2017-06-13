@@ -43,6 +43,26 @@
 #
 # ==============================================================================
 
+#TOC> ==========================================================================
+#TOC>
+#TOC>   Section  Title                                      Line
+#TOC> ----------------------------------------------------------
+#TOC>   1        Load Data                                    97
+#TOC>   2        Subsetting                                  145
+#TOC>   3        Descriptive statistics and simple plots     167
+#TOC>   3.1      Quantiles                                   197
+#TOC>   3.1.1    Boxplot                                     217
+#TOC>   3.1.2    Violin plot                                 234
+#TOC>   3.2      Plotting principles                         270
+#TOC>   3.3      QQ plots                                    285
+#TOC>   3.4      Lines and legends                           292
+#TOC>   4        Exploring flow cytometry data               325
+#TOC>   4.1      Explore scatter plots                       341
+#TOC>   4.2      Trellis plots: all against all              402
+#TOC>
+#TOC> ==========================================================================
+
+
 
 # ==============================================================================
 # # = 1 Project files and setup
@@ -68,29 +88,25 @@
 #       Weissgerber 2015
 #
 # 2 - Confirm:
-#           Confirm that the right files are present.
-getwd()   # Confirm the correct directory
-list.files()
+getwd()          # Confirm the correct directory
+list.files()     # Confirm that the right files are present.
 list.files(all.files = TRUE)
 
 
 # ==============================================================================
-# = 1 Load Data
+# =    1  Load Data  ===========================================================
 # ==============================================================================
 
-# In yesterday's workshop we have worked with
-# a supplementary datafile from a 2014 publication
-# on single-cell RNAseq for the automatic definition
-# of tissue types. The data consists of gene-names,
-# expression enrichment values of clustered cells in the
-# presence and absence of LPS stimulation, and
-# cluster assignment labels. The corresponding
-# paper is in a protected zip file in the project folder.
+# In yesterday's workshop we have worked with a supplementary datafile from a
+# 2014 publication on single-cell RNAseq for the automatic definition of tissue
+# types. The data consists of gene-names, expression enrichment values of
+# clustered cells in the presence and absence of LPS stimulation, and cluster
+# assignment labels. The corresponding paper is in a protected zip file in the
+# project folder.
 
-# We have experimented with loading the data and
-# identified a number of issues. The commands
-# to load the data are in the script readS3.R.
-# Study this script and load the data.
+# We have experimented with loading the data and identified a number of issues.
+# The commands to load the data are in the script readS3.R. Study this script
+# and load the data.
 
 # TASK:
 #     study the script "readS3.R"
@@ -125,9 +141,9 @@ list.files(all.files = TRUE)
 
 
 
-# ==================================================
-# Subsetting
-# ==================================================
+# ==============================================================================
+# =    2  Subsetting  ==========================================================
+# ==============================================================================
 
 # Here is a quiz on subsetting as a recap. Write R expressions
 # that get the following data from LPSdat:
@@ -147,9 +163,9 @@ list.files(all.files = TRUE)
 
 
 
-# ==================================================
-# Descriptive statistics
-# ==================================================
+# ==============================================================================
+# =    3  Descriptive statistics and simple plots  =============================
+# ==============================================================================
 
 set.seed(100)
 x <- rnorm(100, mean=0, sd=1)
@@ -178,9 +194,9 @@ mean(as.numeric(LPSdat[5, seq(2, 14, by = 2)]))
 
 
 
-# =============================================
-# Quantiles: what is the threshold that has a
-# given fraction of values above/below it?
+# ==   3.1  Quantiles  =========================================================
+
+# What is the threshold that has a given fraction of values above/below it?
 
 x <- seq(-4, 4, 0.1)
 f <- dnorm(x, mean=0, sd=1)
@@ -188,7 +204,6 @@ q90 <- qnorm(0.90, mean = 0, sd = 1)
 plot(x, f, xlab="x", ylab="density", type="l", lwd=5)
 abline(v=q90, col=2, lwd=5)
 
-# =============================================
 # empirical quantiles
 
 set.seed(100)
@@ -197,7 +212,10 @@ quantile(x)
 quantile(x, probs=c(0.1, 0.2, 0.9))
 abline(v=quantile(x, probs=c(0.9)), col="green", lwd=3)
 
-# =============================================
+# ==============================================================================
+
+# ===  3.1.1  Boxplot                                  ===
+
 
 set.seed(100)
 x <- rnorm(1000, mean=5, sd=2.5)
@@ -213,7 +231,8 @@ x <- c(x, rnorm(100, mean=2, sd=1))
 hist(x)
 boxplot(x)
 
-# Violin plot
+# ===  3.1.2  Violin plot                              ===
+#
 if (!require(ggplot2, quietly=TRUE)) {
     install.packages("ggplot2")
     library(ggplot2)
@@ -228,8 +247,8 @@ p + geom_violin()
 #     http://docs.ggplot2.org/current/geom_violin.html
 
 
-# Plotting more than one column with a boxplot
-# places the plots side by side.
+# Plotting more than one column with a boxplot places the plots side by side.
+
 colnames(LPSdat)
 boxplot(LPSdat[ ,c("NK.ctrl", "NK.LPS")])
 boxplot(LPSdat[ , c(seq(2, 14, by = 2), seq(3, 15, by = 2))])
@@ -240,51 +259,22 @@ abline(v=7.5)
 #     and boxplots in LPSdat?
 #     Imagine, explore and share.
 #
-#     Interpret the result.
+#     Interpret the results !
 
 
 # ==== CHECKPOINT ... =========================
 
 
-# ==================================================
-# Explore plot types
-# (Section 1 of PlottingReference.R)
-# ==================================================
+# ==============================================================================
 
-# ==================================================
-# Probability distributions
-# ==================================================
+# ==   3.2  Plotting principles  ===============================================
 
-# The binomial distribution
-?dbinom
-x <- 0:1
-f <- dbinom(x, size=1, 0.1)
-plot(x, f, xlab="x", ylab="density", type="h", lwd=5)
+# Explore plot types  (Section 1 of PlottingReference.R)
 
-set.seed(100)
-x <- rbinom(100, size=1, prob=.1)
-hist(x)
-
-
-# ==================================================
-# The Normal distribution
-# ==================================================
-?dnorm
-x <- seq(-4, 4, 0.1)
-f <- dnorm(x, mean=0, sd=1)
-plot(x, f, xlab="x", ylab="density", lwd=5, type="l")
-
-
-# ==================================================
 # Explore lines (Section 3 of PlottingReference.R)
-# ==================================================
-
-x <- seq(-4, 4, 0.1)
-f <- dnorm(x, mean=0, sd=1)
-plot(x, f, xlab="x", ylab="density", lwd=5, lty=3, type="l")
 
 # =============================================
-# Overlay a histogram with a line
+# Overlay a histogram with a line plot
 set.seed(100)
 x <- rnorm(100, mean=0, sd=1)
 hist(x)
@@ -292,15 +282,15 @@ lines(seq(-3,3,0.1), 54 * dnorm(seq(-3,3,0.1)), col="red")
 
 
 
-# ==== QQ PLOTS ====================================
+# ==   3.3  QQ plots  ==========================================================
 
 set.seed(100)
 x <- rnorm(100, mean=0, sd=1)
 qqnorm(x)
 qqline(x, col=2)
 
-# =============================================
-# Plotting lines and legends
+# ==   3.4  Lines and legends  =================================================
+
 # Example: compare the normal distribution with
 # the t-distribution
 x <- seq(-4, 4, 0.1)
@@ -331,9 +321,9 @@ qqplot(x, t)
 # 1 - What columns of LPSdat could be compared with
 #     a qqplot? Explore this. Interpret the result.
 
-# ==================================================
-# Flow cytometry data
-# ==================================================
+# ==============================================================================
+# =    4  Exploring flow cytometry data  =======================================
+# ==============================================================================
 
 # GvHD flow cytometry data is a sample dataset provided in the project.
 gvhd <- read.table("GvHD.txt", header=TRUE)
@@ -347,14 +337,16 @@ gvhdCD3p <- as.data.frame(gvhd[gvhd[, 5]>280, 3:6])
 
 plot(gvhdCD3p[, 1:2])
 
-# ==================================================
-# Explore scatter plots
+# ==============================================================================
+# ==   4.1  Explore scatter plots  =============================================
+
 # Topics:
 # Section 6 - Plotting symbols and characters
 #         2 - Colors
 #         4 - Coordinates
 # ... of PlottingReference.R)
-# ==================================================
+# ==============================================================================
+
 # Scatter plots are extremely useful, but learning
 # a bit about R's plotting capabilities will help
 # tremendously to create INFORMATIVE plots.
@@ -407,16 +399,12 @@ abline(0,1,col = "red")
 
 
 
-# =============================================
-# Trellis plots: all against all
+# ==   4.2  Trellis plots: all against all  ====================================
 
 plot(gvhdCD3p, pch=".")
 
-# =============================================
-
 boxplot(gvhdCD3p)
 
-# =============================================
 
 oPar <- par(mfrow=c(2, 2))
 hist(gvhdCD3p[, 1], 50, main=names(gvhdCD3p)[1], xlab="fluorescent intensity", ylim=c(0, 120))
