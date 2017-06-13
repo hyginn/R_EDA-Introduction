@@ -2,19 +2,18 @@
 #
 # Purpose:
 #
-# Version: 1.0
+# Version: 1.1
 #
-# Date:    2016  06  01
+# Date:    2017  06  01
 # Author:  Boris Steipe (boris.steipe@utoronto.ca)
-#          Some prior contributions by:
-#            Raphael Gottardo, FHCRC
-#            Sohrab Shah, UBC
-# V 1.0    First code
+#
+# V 1.1    2017 updates
+# V 1.0    First code 2016
 #
 # TODO:
 #
 #
-# == HOW TO WORK WITH THIS FILE ======================================
+# == HOW TO WORK WITH THIS FILE ================================================
 #
 #  Go through this script line by line to read and understand the
 #  code. Execute code by typing <cmd><enter>. When nothing is
@@ -32,24 +31,26 @@
 #  Google for an answer, or ask me. Don't continue if you don't
 #  understand what's going on. That's not how it works ...
 #
-#  This is YOUR file. Write your notes in here and add as many
-#  comments as you need to understand what's going on here when you
-#  come back to it in a year. That's the right way: keep code, data
-#  and notes all in one place.
+#  Once you have typed and executed the function init(), you will find a file
+#  called myScript.R in the project directory.
 #
-# ====================================================================
+#  Open it, you can place all of your code-experiments and notes into that
+#  file. This will be your "Lab Journal" for this session.
+#
+# ==============================================================================
 #
 # Module 1: EDA (Exploratory Data Analysis)
 #
-# ====================================================================
+# ==============================================================================
 
 
-# ==================================================
-# As we begin ...
-# ==================================================
-
+# ==============================================================================
+# # = 1 Project files and setup
+# ==============================================================================
+#
 # 1 - What's in the box - overview of files in this project:
 #     .gitignore
+#     .init.R
 #     .Rprofile
 #     R_refcards
 #     Plotting reference
@@ -69,30 +70,31 @@
 # 2 - Confirm:
 #           Confirm that the right files are present.
 getwd()   # Confirm the correct directory
+list.files()
+list.files(all.files = TRUE)
 
 
-# ==================================================
-# Load Data
-# ==================================================
+# ==============================================================================
+# = 1 Load Data
+# ==============================================================================
 
-# Task:
-# In yesterday's workshop we have worked with a
+# In yesterday's workshop we have worked with
 # a supplementary datafile from a 2014 publication
 # on single-cell RNAseq for the automatic definition
 # of tissue types. The data consists of gene-names,
-# Expression values of clustered cells in the
+# expression enrichment values of clustered cells in the
 # presence and absence of LPS stimulation, and
 # cluster assignment labels. The corresponding
-# paper is on the Wiki.
+# paper is in a protected zip file in the project folder.
 
 # We have experimented with loading the data and
 # identified a number of issues. The commands
 # to load the data are in the script readS3.R.
-# Source this script to load the data.
+# Study this script and load the data.
 
 # TASK:
-#     source() the script "readS3.R"
-#     inspect the object "LPSdat".
+#     study the script "readS3.R"
+#     load the object "LPSdat".
 
 
 
@@ -111,9 +113,10 @@ getwd()   # Confirm the correct directory
 # While you are waiting for others to finish a "Checkpoint"
 # here are two suggestions:
 #
-# - Study how RUnit can be used to write tests for
+# - Study how the testthat package can be used to write tests for
 #   code correctness as you develop code:
-#     1 - Install/load the "RUnit" package.
+#     1 - Install/load the "testthat" package
+#           (https://cran.r-project.org/web/packages/testthat/index.html).
 #     2 - Explore the vignettes it contains.
 #     3 - Explore the functions it contains.
 #
