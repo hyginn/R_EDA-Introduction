@@ -370,22 +370,31 @@ plot(hb, colramp = colorRampPalette(c("#FFFFDD",
                                       "#3377AA",
                                       "#0033BB")))
 
+# === variant two: smoothScatter
+smoothScatter(gvhdCD3p[, 1:2],
+              nrpoints = 0,
+              pch=20,
+              cex=0.5,
+              col="#6633BB55")
+
+# === variant three: colors vary by density
+plot(gvhdCD3p[, c(1,2)],
+     col=densCols(gvhdCD3p[, 1], gvhdCD3p[, 2]),
+     pch=16,
+     cex=2)
+
+# === variant four: analysis with specialized package
 # load "prada" package from BioConductor
 if (!require(prada, quietly=TRUE)) {
     source("http://www.bioconductor.org/biocLite.R")
     biocLite("prada")
 }
 
+# using functions ?fitNorm2 and plotNorm2 from the prada package
 nfit <- fitNorm2(gvhdCD3p[, 1], gvhdCD3p[, 2])
 plotNorm2(nfit, selection=TRUE, ellipse=TRUE)
 
-
-# variant two: smoothScatter
-smoothScatter(gvhdCD3p[, 1:2], nrpoints=50, pch=20, cex=0.5, col="#6633BB55")
-
-# variant three: colors vary by density
-plot (gvhdCD3p[, c(1,2)], col=densCols(gvhdCD3p[, 1], gvhdCD3p[, 2]), pch=16, cex=2)
-
+# ==============================================================================
 
 # Task:
 # 1 - Create a scatterplot from differences in
