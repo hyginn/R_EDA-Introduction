@@ -42,30 +42,39 @@
 # Module 1: EDA (Exploratory Data Analysis)
 #
 # ==============================================================================
-
+ 
 #TOC> ==========================================================================
-#TOC>
+#TOC> 
 #TOC>   Section  Title                                      Line
 #TOC> ----------------------------------------------------------
-#TOC>   1        Load Data                                    97
-#TOC>   2        Subsetting                                  145
-#TOC>   3        Descriptive statistics and simple plots     167
-#TOC>   3.1      Quantiles                                   197
-#TOC>   3.1.1    Boxplot                                     217
-#TOC>   3.1.2    Violin plot                                 234
-#TOC>   3.2      Plotting principles                         270
-#TOC>   3.3      QQ plots                                    285
-#TOC>   3.4      Lines and legends                           292
-#TOC>   4        Exploring flow cytometry data               325
-#TOC>   4.1      Explore scatter plots                       341
-#TOC>   4.2      Trellis plots: all against all              402
-#TOC>
+#TOC>   1        Project files and setup                      77
+#TOC>   2        Load Data                                   106
+#TOC>   3        Subsetting                                  154
+#TOC>   4        Descriptive statistics and simple plots     176
+#TOC>   4.1      Quantiles                                   206
+#TOC>   4.1.1    Boxplot                                     226
+#TOC>   4.1.2    Violin plot                                 243
+#TOC>   4.2      Plotting principles                         279
+#TOC>   4.3      QQ plots                                    294
+#TOC>   4.4      Lines and legends                           301
+#TOC>   5        Exploring flow cytometry data               334
+#TOC>   5.1      Explore scatter plots                       350
+#TOC>   5.2      Trellis plots: all against all              424
+#TOC> 
 #TOC> ==========================================================================
+ 
+
+#TOC>
+#TOC>
+
+
+#TOC>
+#TOC>
 
 
 
 # ==============================================================================
-# # = 1 Project files and setup
+# =    1  Project files and setup  =============================================
 # ==============================================================================
 #
 # 1 - What's in the box - overview of files in this project:
@@ -94,7 +103,7 @@ list.files(all.files = TRUE)
 
 
 # ==============================================================================
-# =    1  Load Data  ===========================================================
+# =    2  Load Data  ===========================================================
 # ==============================================================================
 
 # In yesterday's workshop we have worked with a supplementary datafile from a
@@ -142,7 +151,7 @@ list.files(all.files = TRUE)
 
 
 # ==============================================================================
-# =    2  Subsetting  ==========================================================
+# =    3  Subsetting  ==========================================================
 # ==============================================================================
 
 # Here is a quiz on subsetting as a recap. Write R expressions
@@ -164,7 +173,7 @@ list.files(all.files = TRUE)
 
 
 # ==============================================================================
-# =    3  Descriptive statistics and simple plots  =============================
+# =    4  Descriptive statistics and simple plots  =============================
 # ==============================================================================
 
 set.seed(100)
@@ -194,7 +203,7 @@ mean(as.numeric(LPSdat[5, seq(2, 14, by = 2)]))
 
 
 
-# ==   3.1  Quantiles  =========================================================
+# ==   4.1  Quantiles  =========================================================
 
 # What is the threshold that has a given fraction of values above/below it?
 
@@ -214,7 +223,7 @@ abline(v=quantile(x, probs=c(0.9)), col="green", lwd=3)
 
 # ==============================================================================
 
-# ===  3.1.1  Boxplot                                  ===
+# ===  4.1.1  Boxplot                                  === 
 
 
 set.seed(100)
@@ -231,7 +240,7 @@ x <- c(x, rnorm(100, mean=2, sd=1))
 hist(x)
 boxplot(x)
 
-# ===  3.1.2  Violin plot                              ===
+# ===  4.1.2  Violin plot                              === 
 #
 if (!require(ggplot2, quietly=TRUE)) {
     install.packages("ggplot2")
@@ -267,7 +276,7 @@ abline(v=7.5)
 
 # ==============================================================================
 
-# ==   3.2  Plotting principles  ===============================================
+# ==   4.2  Plotting principles  ===============================================
 
 # Explore plot types  (Section 1 of PlottingReference.R)
 
@@ -282,14 +291,14 @@ lines(seq(-3,3,0.1), 54 * dnorm(seq(-3,3,0.1)), col="red")
 
 
 
-# ==   3.3  QQ plots  ==========================================================
+# ==   4.3  QQ plots  ==========================================================
 
 set.seed(100)
 x <- rnorm(100, mean=0, sd=1)
 qqnorm(x)
 qqline(x, col=2)
 
-# ==   3.4  Lines and legends  =================================================
+# ==   4.4  Lines and legends  =================================================
 
 # Example: compare the normal distribution with
 # the t-distribution
@@ -322,7 +331,7 @@ qqplot(x, t)
 #     a qqplot? Explore this. Interpret the result.
 
 # ==============================================================================
-# =    4  Exploring flow cytometry data  =======================================
+# =    5  Exploring flow cytometry data  =======================================
 # ==============================================================================
 
 # GvHD flow cytometry data is a sample dataset provided in the project.
@@ -338,7 +347,7 @@ gvhdCD3p <- as.data.frame(gvhd[gvhd[, 5]>280, 3:6])
 plot(gvhdCD3p[, 1:2])
 
 # ==============================================================================
-# ==   4.1  Explore scatter plots  =============================================
+# ==   5.1  Explore scatter plots  =============================================
 
 # Topics:
 # Section 6 - Plotting symbols and characters
@@ -412,7 +421,7 @@ abline(0,1,col = "red")
 
 
 
-# ==   4.2  Trellis plots: all against all  ====================================
+# ==   5.2  Trellis plots: all against all  ====================================
 
 plot(gvhdCD3p, pch=".")
 
