@@ -202,7 +202,7 @@ x <- seq(-4, 4, 0.1)
 f <- dnorm(x, mean=0, sd=1)
 q90 <- qnorm(0.90, mean = 0, sd = 1)
 plot(x, f, xlab="x", ylab="density", type="l", lwd=5)
-abline(v=q90, col=2, lwd=5)
+abline(v=q90, col="red", lwd=5)
 
 # empirical quantiles
 
@@ -307,7 +307,7 @@ legend(-4, .4, c("Normal", "t2"), col=1:2, lwd=5)
 set.seed(100)
 t <- rt(100, df=2)
 qqnorm(t)
-qqline(t, col=2)
+qqline(t, col="#CC0000")
 
 
 # =============================================
@@ -375,6 +375,10 @@ if (!require(prada, quietly=TRUE)) {
     source("http://www.bioconductor.org/biocLite.R")
     biocLite("prada")
 }
+
+nfit <- fitNorm2(gvhdCD3p[, 1], gvhdCD3p[, 2])
+plotNorm2(nfit, selection=TRUE, ellipse=TRUE)
+
 
 # variant two: smoothScatter
 smoothScatter(gvhdCD3p[, 1:2], nrpoints=50, pch=20, cex=0.5, col="#6633BB55")
